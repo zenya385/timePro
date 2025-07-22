@@ -1,67 +1,5 @@
 import { formatTime, pad } from "./formatTime.js";
 
-const timeDisplay = document.querySelector("#time");
-const startBtn = document.querySelector("#startBtn");
-const pauseBtn = document.querySelector("#pauseBtn");
-const resetBtn = document.querySelector("#resetBtn");
-
-let startTime = 0;
-let elapsedTime = 0;
-let intervalId = null;
-let isRuning = false;
-
-startBtn.addEventListener("click", start);
-pauseBtn.addEventListener("click", pause);
-resetBtn.addEventListener("click", reset);
-
-// function pad(num, digit = 2) {
-//   return num.toString().padStart(digit, "0");
-// }
-
-// function formatTime(ms) {
-//   const milliseconds = ms % 1000;
-//   const totalSeconds = Math.floor(ms / 1000);
-//   const seconds = totalSeconds % 60;
-//   const minutes = Math.floor(totalSeconds / 60) % 60;
-//   const hours = Math.floor(totalSeconds / 3600);
-
-//   return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}.${pad(milliseconds)}`;
-// }
-
-function updateTime() {
-  const now = Date.now();
-  elapsedTime = now - startTime;
-  // console.log("elapsedTime :>> ", elapsedTime);
-  timeDisplay.textContent = formatTime(elapsedTime);
-}
-// console.log("Date.now() :>> ", Date.now());
-
-function start() {
-  if (!isRuning) {
-    //   console.log("start :>> ");
-    startTime = Date.now() - elapsedTime;
-    intervalId = setInterval(updateTime, 10);
-    console.log("intervalId :>> ", intervalId);
-    //   console.log("startTime :>> ", startTime);
-    isRuning = true;
-    return;
-  }
-}
-function pause() {
-  //   console.log("pause :>> ");
-  if (isRuning) {
-    clearInterval(intervalId);
-    isRuning = false;
-  }
-}
-function reset() {
-  //   console.log("reset :>> ");
-  clearInterval(intervalId);
-  elapsedTime = 0;
-  isRuning = false;
-  timeDisplay.textContent = "00:00:00.000";
-}
-
 //6 ==================== countdown timer =============================
 
 const dateTimeInput = document.querySelector("#datetime");
@@ -90,9 +28,6 @@ function startCountdown() {
   countdownIntervalId = setInterval(() => {
     const currentTime = new Date();
     const diffTime = targetDate.getTime() - currentTime;
-    // console.log("targetDate :>> ", targetDate);
-    // console.log("now :>> ", now);
-    // console.log("diffTime :>> ", diffTime);
     if (diffTime <= 0) {
       clearInterval(countdownIntervalId);
       countdownDisplayMsg.textContent = "✅ Час настав!";
@@ -107,7 +42,7 @@ function startCountdown() {
 
     countdownDisplay.innerHTML =
       // countdownDisplay.textContent =
-      `${pad(days)}<small>d</small> ${pad(hours)}<small>h</small> ${pad(
+      `${pad(days)}<small>days</small> ${pad(hours)}<small>hours</small> ${pad(
         minutes
       )}<small>min</small> ${pad(seconds)}<small>sec</small>`;
   }, 1000);

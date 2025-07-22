@@ -88,6 +88,8 @@ button {
   font-family: "DSEG14-Classic-MINI";
   color: lime;
   background-color: black;
+  border: 2px solid #00ff00;
+  border-radius: 5px;
 
   padding: 10px 20px;
   font-size: 1rem;
